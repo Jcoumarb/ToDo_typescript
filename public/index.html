@@ -12,17 +12,37 @@
     			#list {
       				list-style: none;
       				padding: 0;
+				display:flex;
+				flex-direction: column;
+				justify-content:center;
     			}
+
+			body{
+				background-color: #999999; /* Darker grey background for the body */
+				padding: 20px; /* Add some padding for spacing */
+			}
+
+			h1{
+				color: #1e90ff;
+				text-align: center; /* Align the text horizontally */
+			}
+
+			.container{
+				margin: 0 auto;
+				width: fit-content;
+			}
   		</style>
 	</head>
 
 	<body>
 		<h1>Shit to Do</h1>
-  		<ul id="list"></ul>
-  		<form id="new-task-form">
-    			<input type="text" id="new-task-title">
-    			<button type="submit">Add</button>
-			<button id="remove" type"button">remove</button>
-  		</form>
+		<div class="container">
+			<ul id="list"></ul>
+  			<form id="new-task-form">
+    				<input type="text" id="new-task-title">
+    				<button type="submit">Add</button>
+				<button id="remove" type"button">remove</button>
+  			</form>
+		</div>
 	</body
 </html>
