@@ -10,7 +10,7 @@ const form = document.getElementById("new-task-form") as HTMLFormElement | null
 const input = document.querySelector<HTMLInputElement>("#new-task-title")
 
 // Local storage of tasks and loading from local storage
-const tasks: Task[] = loadTasks()
+let tasks: Task[] = loadTasks()
 tasks.forEach(addListItem)
 
 // Create type called 'Task' (seems like this is the meat and potatoes of typescript)
@@ -41,6 +41,26 @@ form?.addEventListener("submit", e => {
 	addListItem(newTask)
 	input.value = ""
 })
+
+// Event listener for form to detect remove
+const removeButton: HTMLElement  | null  = document.getElementById('remove')
+removeButton?.addEventListener("click", function(){
+	const checkedItems: NodeListOf<HTMLInputElement> | undefined = list?.querySelectorAll("input[type='checkbox']:checked")	//grabs data of checked checkkboxes in the form of a list
+	const textRemoving: string[] = []	//creates array that will be used to store nodes that need to be removed from storage
+
+	checkedItems?.forEach(function(item: HTMLInputElement){	//iterates over the checked checkboxes grabbing their parent element and deleting them while adding the data to textRemoving
+	 	const parentElement: HTMLElement | null = item.parentElement
+		parentElement?.remove()
+		const taskText: string = parentElement?.textContent?.trim() || ''
+		//honestly not sure why this works in this order (it probably retains pointers)
+		textRemoving.push(taskText)
+	})
+
+	//removes items that have titles that are in the textRemoving array
+	tasks = tasks.filter(item => !textRemoving.includes(item.title))
+	saveTasks()
+})
+
 // The function needs to know the type that task is and you could go through like this and tell it what it needs within the 'object'
 // or you could take advantage of that fact that you can create your own type
 // function addListItem(task: {id: string, title: string, completed: boolean, createdAt: Date})
