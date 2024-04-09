@@ -8,7 +8,6 @@ form?.addEventListener("submit", (e) => {
   if (input?.value == "" || input?.value == null)
     return;
   const newTask = {
-    id: uuidV4(),
     title: input.value,
     completed: false,
     createdAt: new Date()
