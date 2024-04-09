@@ -1,5 +1,3 @@
-import {v4 as uuidV4} from "../_snowpack/pkg/uuid.js";
-console.log(uuidV4());
 const list = document.querySelector("#list");
 const form = document.getElementById("new-task-form");
 const input = document.querySelector("#new-task-title");
